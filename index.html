@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/90/three.js"></script>
+    <script src="/node_modules/three/build/three.js"></script>
+    <script src="/node_modules/three/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="main.css"/>
@@ -26,126 +27,6 @@
 				overflow: hidden;
       }
     </style>
-    <script type="text/x-glsl-es-frag" id="fragment0">
-      varying float vZ;
-      uniform float time;
-      uniform vec2 size;
-
-      void main() {
-        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
-        float a = sin(time*0.3)*2.0*3.14159;
-        d = vec2( d.x*cos(a) + d.y*sin(a),
-          -d.x*sin(a) + d.y*cos(a));
-          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
-          float b = abs(vZ)/ 160.0;
-          gl_FragColor = vec4(b,rg, 0.7);
-      }
-    </script>
-
-    <script type="text/x-glsl-es-frag" id="fragment1">
-      varying float vZ;
-      uniform float time;
-      uniform vec2 size;
-
-      void main() {
-        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
-        float a = sin(time*0.5)*2.0*3.14159;
-        d = vec2( d.x*cos(a) + d.y*sin(a),
-          -d.x*sin(a) + d.y*cos(a));
-          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
-          float b = abs(vZ)/ 160.0;
-          gl_FragColor = vec4(b,rg + 0.2, 0.1);
-      }
-    </script>
-
-    <script type="text/x-glsl-es-frag" id="fragment2">
-      varying float vZ;
-      uniform float time;
-      uniform vec2 size;
-
-      void main() {
-        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
-        float a = sin(time*0.3)*2.0*3.14159;
-        d = vec2( d.x*cos(a) + d.y*sin(a),
-          -d.x*sin(a) + d.y*cos(a));
-          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
-          float b = abs(vZ)/ 160.0;
-          gl_FragColor = vec4(b,rg, 0.1);
-      }
-    </script>
-
-    <script type="text/x-glsl-es-frag" id="fragment3">
-      varying float vZ;
-      uniform float time;
-      uniform vec2 size;
-
-      void main() {
-        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
-        float a = sin(time*0.3)*2.0*3.14159;
-        d = vec2( d.x*cos(a) + d.y*sin(a),
-          -d.x*sin(a) + d.y*cos(a));
-          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
-          float b = abs(vZ)/ 160.0;
-          gl_FragColor = vec4(b,rg + 0.6, 0.1);
-      }
-    </script>
-
-
-    <script type="text/x-glsl-es-vert" id="vertex0">
-      varying float vZ;
-      uniform float time;
-
-      void main() {
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        mvPosition.y += 20.0*sin(time*0.5+mvPosition.x/25.0);
-        mvPosition.x += 30.0*cos(time*0.5+mvPosition.y/25.0);
-        vec4 p = projectionMatrix * mvPosition;
-        vZ = p.z;
-        gl_Position = p;
-      }
-    </script>
-
-    <script type="text/x-glsl-es-vert" id="vertex1">
-      varying float vZ;
-      uniform float time;
-
-      void main() {
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        mvPosition.y += 20.0*sin(time*0.1+mvPosition.x/50.0);
-        mvPosition.x += 30.0*cos(time*0.1+mvPosition.y/50.0);
-        vec4 p = projectionMatrix * mvPosition;
-        vZ = p.z;
-        gl_Position = p;
-      }
-    </script>
-    <script type="text/x-glsl-es-vert" id="vertex2">
-      varying float vZ;
-      uniform float time;
-
-      void main() {
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        mvPosition.y += 20.0*sin(time*0.5+mvPosition.x/10.0);
-        mvPosition.x += 30.0*cos(time*0.5+mvPosition.y/10.0);
-        vec4 p = projectionMatrix * mvPosition;
-        vZ = p.z;
-        gl_Position = p;
-      }
-    </script>
-
-    <script type="text/x-glsl-es-vert" id="vertex3">
-      varying float vZ;
-      uniform float time;
-
-      void main() {
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        mvPosition.y += 20.0*sin(time*0.1+mvPosition.x/30.0);
-        mvPosition.x += 30.0*cos(time*0.1+mvPosition.y/30.0);
-        vec4 p = projectionMatrix * mvPosition;
-        vZ = p.z;
-        gl_Position = p;
-      }
-    </script>
-
     <script src="csv-parser.js"></script>
     <script src="main.js"></script>
 
