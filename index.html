@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/90/three.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="main.css"/>
+  </head>
+  <body>
+    <h1>
+      Water temperature, salinity, and other data from CTD taken from the RV Sikuliaq in the Pacific Ocean between San Diego, California and Manzanillo, Mexico from 2016-12-21 to 2017-01-13 (NCEI Accession 0164968)
+    </h1>
+    <p>https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:0164968</p>
+    <button id="modal">Project info</button>
+    <p id="info">For my final project in 3D modeling, I wanted to explore and understand how the graphics pipeline works. By working with GLSL (OpenGL Shading Language) and Three.js, I made a data visualization of Water pressure, temperature, and salinity in the Pacific Ocean between San Diego, California and Manzanillo, Mexico from 2016-12-21 to 2017-01-13. </p>
+    <style>
+      body {
+        color: #000;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+				background-color: #fff;
+				margin: 0px;
+				overflow: hidden;
+      }
+    </style>
+    <script type="text/x-glsl-es-frag" id="fragment0">
+      varying float vZ;
+      uniform float time;
+      uniform vec2 size;
+
+      void main() {
+        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
+        float a = sin(time*0.3)*2.0*3.14159;
+        d = vec2( d.x*cos(a) + d.y*sin(a),
+          -d.x*sin(a) + d.y*cos(a));
+          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
+          float b = abs(vZ)/ 160.0;
+          gl_FragColor = vec4(b,rg, 0.7);
+      }
+    </script>
+
+    <script type="text/x-glsl-es-frag" id="fragment1">
+      varying float vZ;
+      uniform float time;
+      uniform vec2 size;
+
+      void main() {
+        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
+        float a = sin(time*0.5)*2.0*3.14159;
+        d = vec2( d.x*cos(a) + d.y*sin(a),
+          -d.x*sin(a) + d.y*cos(a));
+          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
+          float b = abs(vZ)/ 160.0;
+          gl_FragColor = vec4(b,rg + 0.2, 0.1);
+      }
+    </script>
+
+    <script type="text/x-glsl-es-frag" id="fragment2">
+      varying float vZ;
+      uniform float time;
+      uniform vec2 size;
+
+      void main() {
+        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
+        float a = sin(time*0.3)*2.0*3.14159;
+        d = vec2( d.x*cos(a) + d.y*sin(a),
+          -d.x*sin(a) + d.y*cos(a));
+          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
+          float b = abs(vZ)/ 160.0;
+          gl_FragColor = vec4(b,rg, 0.1);
+      }
+    </script>
+
+    <script type="text/x-glsl-es-frag" id="fragment3">
+      varying float vZ;
+      uniform float time;
+      uniform vec2 size;
+
+      void main() {
+        vec2 d = gl_FragCoord.xy - (0.5+0.01*sin(time))*size;
+        float a = sin(time*0.3)*2.0*3.14159;
+        d = vec2( d.x*cos(a) + d.y*sin(a),
+          -d.x*sin(a) + d.y*cos(a));
+          vec2 rg = vec2(1.0)-abs(d)/(0.5*size.xx);
+          float b = abs(vZ)/ 160.0;
+          gl_FragColor = vec4(b,rg + 0.6, 0.1);
+      }
+    </script>
+
+
+    <script type="text/x-glsl-es-vert" id="vertex0">
+      varying float vZ;
+      uniform float time;
+
+      void main() {
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        mvPosition.y += 20.0*sin(time*0.5+mvPosition.x/25.0);
+        mvPosition.x += 30.0*cos(time*0.5+mvPosition.y/25.0);
+        vec4 p = projectionMatrix * mvPosition;
+        vZ = p.z;
+        gl_Position = p;
+      }
+    </script>
+
+    <script type="text/x-glsl-es-vert" id="vertex1">
+      varying float vZ;
+      uniform float time;
+
+      void main() {
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        mvPosition.y += 20.0*sin(time*0.1+mvPosition.x/50.0);
+        mvPosition.x += 30.0*cos(time*0.1+mvPosition.y/50.0);
+        vec4 p = projectionMatrix * mvPosition;
+        vZ = p.z;
+        gl_Position = p;
+      }
+    </script>
+    <script type="text/x-glsl-es-vert" id="vertex2">
+      varying float vZ;
+      uniform float time;
+
+      void main() {
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        mvPosition.y += 20.0*sin(time*0.5+mvPosition.x/10.0);
+        mvPosition.x += 30.0*cos(time*0.5+mvPosition.y/10.0);
+        vec4 p = projectionMatrix * mvPosition;
+        vZ = p.z;
+        gl_Position = p;
+      }
+    </script>
+
+    <script type="text/x-glsl-es-vert" id="vertex3">
+      varying float vZ;
+      uniform float time;
+
+      void main() {
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        mvPosition.y += 20.0*sin(time*0.1+mvPosition.x/30.0);
+        mvPosition.x += 30.0*cos(time*0.1+mvPosition.y/30.0);
+        vec4 p = projectionMatrix * mvPosition;
+        vZ = p.z;
+        gl_Position = p;
+      }
+    </script>
+
+    <script src="csv-parser.js"></script>
+    <script src="main.js"></script>
+
+  </body>
+</html>
