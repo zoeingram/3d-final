@@ -7,28 +7,84 @@
     <script src="/node_modules/three/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="grid.css"/>
   </head>
   <body>
-    <h1>
-      Water temperature, salinity, and other data from CTD taken from the RV Sikuliaq in the Pacific Ocean between San Diego, California and Manzanillo, Mexico from 2016-12-21 to 2017-01-13 (NCEI Accession 0164968)
-    </h1>
-    <p>https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:0164968</p>
-    <button id="modal">Project info</button>
-    <p id="info">For my final project in 3D modeling, I wanted to explore and understand how the graphics pipeline works. By working with GLSL (OpenGL Shading Language) and Three.js, I made a data visualization of Water pressure, temperature, and salinity in the Pacific Ocean between San Diego, California and Manzanillo, Mexico from 2016-12-21 to 2017-01-13. </p>
-    <style>
-      body {
-        color: #000;
-				font-family:Monospace;
-				font-size:13px;
-				text-align:center;
-				background-color: #fff;
-				margin: 0px;
-				overflow: hidden;
-      }
-    </style>
-    <script src="csv-parser.js"></script>
-    <script src="main.js"></script>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+          <div id="title">
+            <audio id="waves">
+              <source src="waves.mp3" type="audio/mpeg" autoplay>
+          </audio>
+
+            <h1>
+              Water pressure, temperature, and salinity in the Pacific Ocean between San Diego, California and Manzanillo, Mexico from 2016-12-21 to 2017-01-13. <br>(NCEI Accession 0164968)
+            </h1>
+            <p>https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:0164968</p>
+            <button id="modal">Project Info</button>
+
+          </div>
+            <div id="info">
+            <p>For my final project, I wanted to explore and understand how the graphics pipeline works. By working with GLSL (OpenGL Shading Language) and Three.js, I made a data visualization of water pressure, temperature, and salinity in the Pacific Ocean between San Diego, California and Manzanillo, Mexico.
+            </p>
+            <p>
+            As each row of dataset is parsed, values from the rows (pressure, temperature, salinity, oxygen) are passed into the constructor function which generates new geometries. After the creation of the shape, fragment and vertex shaders are dynamically written in GLSL, with values from the data, and assigned as materials to the corresponding shape.
+          </p>
+          <p>
+            The result is a colorful, wave-like visualization, in which the user can zoom, pan, and explore the geometries.
+            </p>
+          </div>
+
+          <style>
+            h1 {
+              color: #000;
+              font-family: Monospace;
+              font-size:13px;
+              background-color: #fff;
+              margin: 0px;
+              overflow: hidden;
+            }
+            p {
+              font-family: monospace;
+            }
+            h1 {
+              font-size: 16px;
+            }
+
+            #title {
+              margin-left: 5%;
+              margin-bottom: 1%;
+            }
+            #info {
+              display: none;
+            }
+            #info p {
+              font-size: 10px;
+            }
+
+            .ui-dialog {
+              background: white;
+              padding: 10px;
+            }
+
+            button {
+              background: none;
+              border: 1px solid black;
+              color: black;
+              font-family: monospace;
+            }
+
+          </style>
+          <script src="csv-parser.js"></script>
+          <script src="main.js"></script>
+
+        </div>
+      </div>
+    </div>
+
+
 
   </body>
 </html>

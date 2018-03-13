@@ -1,4 +1,4 @@
-var renderer, container, camera, scene, material, mesh, cube;
+var renderer, contain, camera, scene, material, mesh, cube;
 var shape;
 
 var shapesArr = [];
@@ -55,6 +55,11 @@ function writeVertexShader(value1, value2, value3, value4) {
   "}"
 }
 
+function generateValue(min, max) {
+  return  Math.random() * (max - min) + min;
+}
+
+
 window.addEventListener('load', init);
 function init() {
     scene = new THREE.Scene();
@@ -71,8 +76,8 @@ function init() {
 
     renderer.setSize(width, height);
     renderer.setClearColor(0xffffff);
-    container = renderer.domElement;
-    document.body.appendChild(container);
+    contain = renderer.domElement;
+    document.body.appendChild(contain);
 
     $.get("small-data.csv")
         .pipe(CSV.parse)
@@ -82,8 +87,9 @@ function init() {
                 b = rows[i][1];
                 c = rows[i][2];
                 d = rows[i][3];
-                d = d/1000;
-                e = b/100;
+                d = (d + generateValue(100, 400)) / 1000;
+                e = (b + generateValue(10, 30)) / 100;
+
 
                 if(i % 2 == 0) { //if even iteration
                   writeVertexShader(a,b,c -4,b);
@@ -129,6 +135,8 @@ function render(t) {
 }
 
 $(document).ready(function() {
+
+  $('.ui-dialog').css('background-color', 'rgba(255,255,255,0.5)');
     $('#modal').on('click', function() {
         $('#info').dialog({
             show: 'fade'
