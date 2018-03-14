@@ -15,11 +15,10 @@
         <div class="col-12">
 
           <div id="title">
-
             <h1>
               Water pressure, temperature, and salinity in the Pacific Ocean between San Diego, California and Manzanillo, Mexico from 2016-12-21 to 2017-01-13. <br>(NCEI Accession 0164968)
             </h1>
-            <p>https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:0164968</p>
+            <p> <a href="https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:0164968">Data source</a> | Zoom and drag to interact with the graphic</p>
             <button id="modal">Project Info</button>
 
           </div>
@@ -38,18 +37,21 @@
             h1 {
               color: #000;
               font-family: Monospace;
-              font-size:13px;
               background-color: #fff;
               margin: 0px;
               overflow: hidden;
+              font-size: 14px;
+
             }
-            p {
+            p, a {
               font-family: monospace;
-            }
-            h1 {
-              font-size: 16px;
+              font-size: 10px;
+              text-decoration: none;
             }
 
+            a {
+              text-decoration: underline;
+            }
             #title {
               margin-left: 5%;
               margin-bottom: 1%;
@@ -71,6 +73,7 @@
               border: 1px solid black;
               color: black;
               font-family: monospace;
+              font-size: 8px;
             }
 
           </style>
